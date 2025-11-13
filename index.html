@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LREX - 運送管理システム</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- サイドバー -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="logo_w (1).png" alt="LREX Logo" class="logo">
+            </div>
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#" class="nav-item active" data-page="dashboard">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></span>
+                        <span>ダッシュボード</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="orders">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></span>
+                        <span>受注管理</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="dispatch">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></span>
+                        <span>配車・運行管理</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="vehicles">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></span>
+                        <span>車両管理</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="labor">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></span>
+                        <span>労務管理</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="accounting">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></span>
+                        <span>経理・経営管理</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="general">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg></span>
+                        <span>総務</span>
+                    </a></li>
+                    <li><a href="#" class="nav-item" data-page="alerts">
+                        <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></span>
+                        <span>アラート</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- メインコンテンツ -->
+        <main class="main-content">
+            <!-- ヘッダー -->
+            <header class="header">
+                <h1 class="page-title">ダッシュボード</h1>
+                <div class="header-actions">
+                    <button class="btn-icon" title="通知">
+                        <svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/></svg>
+                        <span class="badge">3</span>
+                    </button>
+                    <div class="user-menu">
+                        <span class="user-name">管理者</span>
+                        <span class="user-avatar"><svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- ページコンテンツ -->
+            <div class="content-area">
+                <!-- ダッシュボード -->
+                <div id="dashboard" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1a2.996 2.996 0 0 0-5.5-1.65l-.5.67-.5-.68C10.96 2.54 10 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>本日の受注</h3>
+                                <p class="stat-value">24件</p>
+                                <span class="stat-change positive">+12%</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>運行中</h3>
+                                <p class="stat-value">18台</p>
+                                <span class="stat-change">通常</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>未処理アラート</h3>
+                                <p class="stat-value">3件</p>
+                                <span class="stat-change negative">要対応</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>今月の売上</h3>
+                                <p class="stat-value">¥12,450,000</p>
+                                <span class="stat-change positive">+8%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <h2>緊急対応が必要な案件</h2>
+                            <div class="alert-list">
+                                <div class="alert-item urgent">
+                                    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span>
+                                    <div class="alert-content">
+                                        <p><strong>配車未確定</strong></p>
+                                        <p>受注No. 2024-0012 - 期限: 本日 15:00</p>
+                                    </div>
+                                    <button class="btn-small">対応</button>
+                                </div>
+                                <div class="alert-item warning">
+                                    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span>
+                                    <div class="alert-content">
+                                        <p><strong>受領書未回収</strong></p>
+                                        <p>案件No. 2024-0008 - 期限: 明日</p>
+                                    </div>
+                                    <button class="btn-small">対応</button>
+                                </div>
+                                <div class="alert-item info">
+                                    <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></span>
+                                    <div class="alert-content">
+                                        <p><strong>点呼簿作成</strong></p>
+                                        <p>明日の点呼簿作成が必要です</p>
+                                    </div>
+                                    <button class="btn-small">対応</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h2>最近の受注</h2>
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>受注No.</th>
+                                        <th>取引先</th>
+                                        <th>配車状況</th>
+                                        <th>納期</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2024-0015</td>
+                                        <td>株式会社ABC</td>
+                                        <td><span class="badge success">配車済</span></td>
+                                        <td>2024/12/20</td>
+                                        <td><button class="btn-link">詳細</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-0014</td>
+                                        <td>XYZ物流</td>
+                                        <td><span class="badge warning">配車中</span></td>
+                                        <td>2024/12/21</td>
+                                        <td><button class="btn-link">詳細</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2024-0013</td>
+                                        <td>DEF商事</td>
+                                        <td><span class="badge danger">未配車</span></td>
+                                        <td>2024/12/19</td>
+                                        <td><button class="btn-link">詳細</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 受注管理 -->
+                <div id="orders" class="page">
+                    <div class="page-header">
+                        <h2>受注管理</h2>
+                        <button class="btn-primary">新規受注登録</button>
+                    </div>
+                    <div class="filters">
+                        <input type="text" placeholder="受注No.、取引先名で検索" class="search-input">
+                        <select class="filter-select">
+                            <option>すべてのステータス</option>
+                            <option>未配車</option>
+                            <option>配車中</option>
+                            <option>配車済</option>
+                            <option>運行中</option>
+                            <option>完了</option>
+                        </select>
+                        <input type="date" class="filter-date">
+                        <button class="btn-secondary">検索</button>
+                    </div>
+                    <div class="card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>受注No.</th>
+                                    <th>受注日</th>
+                                    <th>取引先</th>
+                                    <th>出発地</th>
+                                    <th>到着地</th>
+                                    <th>ステータス</th>
+                                    <th>納期</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2024-0015</td>
+                                    <td>2024/12/18</td>
+                                    <td>株式会社ABC</td>
+                                    <td>東京</td>
+                                    <td>大阪</td>
+                                    <td><span class="badge success">配車済</span></td>
+                                    <td>2024/12/20</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2024-0014</td>
+                                    <td>2024/12/18</td>
+                                    <td>XYZ物流</td>
+                                    <td>名古屋</td>
+                                    <td>福岡</td>
+                                    <td><span class="badge warning">配車中</span></td>
+                                    <td>2024/12/21</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2024-0013</td>
+                                    <td>2024/12/17</td>
+                                    <td>DEF商事</td>
+                                    <td>横浜</td>
+                                    <td>京都</td>
+                                    <td><span class="badge danger">未配車</span></td>
+                                    <td>2024/12/19</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 配車・運行管理 -->
+                <div id="dispatch" class="page">
+                    <div class="page-header">
+                        <h2>配車・運行管理</h2>
+                        <div>
+                            <button class="btn-secondary">運行表作成</button>
+                            <button class="btn-primary">配車計画作成</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>本日の配車状況</h3>
+                        <div class="dispatch-grid">
+                            <div class="dispatch-card">
+                                <div class="dispatch-header">
+                                    <span class="vehicle-number">車両: 12-34</span>
+                                    <span class="badge success">運行中</span>
+                                </div>
+                                <div class="dispatch-body">
+                                    <p><strong>運転手:</strong> 山田太郎</p>
+                                    <p><strong>ルート:</strong> 東京 → 大阪</p>
+                                    <p><strong>受注No.:</strong> 2024-0015</p>
+                                    <p><strong>予定到着:</strong> 2024/12/20 14:00</p>
+                                </div>
+                                <div class="dispatch-actions">
+                                    <button class="btn-small">詳細</button>
+                                    <button class="btn-small">連絡</button>
+                                </div>
+                            </div>
+                            <div class="dispatch-card">
+                                <div class="dispatch-header">
+                                    <span class="vehicle-number">車両: 56-78</span>
+                                    <span class="badge warning">待機中</span>
+                                </div>
+                                <div class="dispatch-body">
+                                    <p><strong>運転手:</strong> 佐藤花子</p>
+                                    <p><strong>ルート:</strong> 名古屋 → 福岡</p>
+                                    <p><strong>受注No.:</strong> 2024-0014</p>
+                                    <p><strong>出発予定:</strong> 2024/12/20 10:00</p>
+                                </div>
+                                <div class="dispatch-actions">
+                                    <button class="btn-small">詳細</button>
+                                    <button class="btn-small">連絡</button>
+                                </div>
+                            </div>
+                            <div class="dispatch-card">
+                                <div class="dispatch-header">
+                                    <span class="vehicle-number">車両: 90-12</span>
+                                    <span class="badge danger">未配車</span>
+                                </div>
+                                <div class="dispatch-body">
+                                    <p><strong>受注No.:</strong> 2024-0013</p>
+                                    <p><strong>ルート:</strong> 横浜 → 京都</p>
+                                    <p><strong>納期:</strong> 2024/12/19</p>
+                                    <p class="urgent-text"><svg viewBox="0 0 24 24" style="width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin-right: 4px; fill: var(--color-red);"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>配車が必要です</p>
+                                </div>
+                                <div class="dispatch-actions">
+                                    <button class="btn-small btn-primary">配車</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>点呼簿</h3>
+                        <div class="page-header">
+                            <p>点呼簿の自動作成機能により、工数を削減できます</p>
+                            <button class="btn-primary">点呼簿作成</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 車両管理 -->
+                <div id="vehicles" class="page">
+                    <div class="page-header">
+                        <h2>車両管理</h2>
+                        <button class="btn-primary">新規車両登録</button>
+                    </div>
+                    <div class="card">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>車両番号</th>
+                                    <th>車種</th>
+                                    <th>運転手</th>
+                                    <th>状態</th>
+                                    <th>最終点検日</th>
+                                    <th>保険期限</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>12-34</td>
+                                    <td>大型トラック</td>
+                                    <td>山田太郎</td>
+                                    <td><span class="badge success">運行中</span></td>
+                                    <td>2024/11/15</td>
+                                    <td>2025/06/30</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>56-78</td>
+                                    <td>中型トラック</td>
+                                    <td>佐藤花子</td>
+                                    <td><span class="badge warning">待機中</span></td>
+                                    <td>2024/11/20</td>
+                                    <td>2025/07/15</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>90-12</td>
+                                    <td>大型トラック</td>
+                                    <td>未割当</td>
+                                    <td><span class="badge">整備中</span></td>
+                                    <td>2024/12/01</td>
+                                    <td>2025/08/20</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 労務管理 -->
+                <div id="labor" class="page">
+                    <div class="page-header">
+                        <h2>労務管理</h2>
+                        <button class="btn-primary">新規従業員登録</button>
+                    </div>
+                    <div class="card">
+                        <h3>乗務員一覧</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>氏名</th>
+                                    <th>所属</th>
+                                    <th>健康診断期限</th>
+                                    <th>免許証期限</th>
+                                    <th>運行時間（今月）</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>山田太郎</td>
+                                    <td>第一営業所</td>
+                                    <td>2025/03/31</td>
+                                    <td>2026/05/15</td>
+                                    <td>180時間</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>佐藤花子</td>
+                                    <td>第一営業所</td>
+                                    <td>2025/04/30</td>
+                                    <td>2027/08/20</td>
+                                    <td>165時間</td>
+                                    <td>
+                                        <button class="btn-link">詳細</button>
+                                        <button class="btn-link">編集</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 経理・経営管理 -->
+                <div id="accounting" class="page">
+                    <div class="page-header">
+                        <h2>経理・経営管理</h2>
+                        <div>
+                            <button class="btn-secondary">日計表作成</button>
+                            <button class="btn-secondary">車両別収益表</button>
+                            <button class="btn-primary">請求書発行</button>
+                        </div>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>今月の売上</h3>
+                                <p class="stat-value">¥12,450,000</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M19.77 7.23l.01-.01-3.72-3.72L15 4.56l2.11 2.11c-.94.36-1.61 1.26-1.61 2.33 0 1.38 1.12 2.5 2.5 2.5.36 0 .69-.08 1-.21v7.21c0 .55-.45 1-1 1s-1-.45-1-1V14c0-1.1-.9-2-2-2h-1V5c0-1.1-.9-2-2-2H6c-1.1 0-2 .9-2 2v16h10v-7.5h1.5v5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V9c0-.69-.28-1.32-.73-1.77zM12 10H6V5h6v5zm6 0c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>燃料費</h3>
+                                <p class="stat-value">¥1,230,000</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>ETC料金</h3>
+                                <p class="stat-value">¥450,000</p>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg></div>
+                            <div class="stat-info">
+                                <h3>粗利益</h3>
+                                <p class="stat-value">¥10,770,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h3>未処理の請求書</h3>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>請求書No.</th>
+                                    <th>取引先</th>
+                                    <th>金額</th>
+                                    <th>請求日</th>
+                                    <th>支払期限</th>
+                                    <th>ステータス</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>INV-2024-001</td>
+                                    <td>株式会社ABC</td>
+                                    <td>¥450,000</td>
+                                    <td>2024/12/01</td>
+                                    <td>2024/12/31</td>
+                                    <td><span class="badge warning">未入金</span></td>
+                                    <td><button class="btn-link">詳細</button></td>
+                                </tr>
+                                <tr>
+                                    <td>INV-2024-002</td>
+                                    <td>XYZ物流</td>
+                                    <td>¥320,000</td>
+                                    <td>2024/12/05</td>
+                                    <td>2025/01/05</td>
+                                    <td><span class="badge warning">未入金</span></td>
+                                    <td><button class="btn-link">詳細</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 総務 -->
+                <div id="general" class="page">
+                    <div class="page-header">
+                        <h2>総務</h2>
+                    </div>
+                    <div class="card-grid">
+                        <div class="card">
+                            <h3>給与計算</h3>
+                            <p>給与計算の管理を行います</p>
+                            <button class="btn-primary">給与計算</button>
+                        </div>
+                        <div class="card">
+                            <h3>車両保険</h3>
+                            <p>車両保険の手続きを管理します</p>
+                            <button class="btn-primary">保険管理</button>
+                        </div>
+                        <div class="card">
+                            <h3>ETC発行</h3>
+                            <p>ETCカードの発行依頼を管理します</p>
+                            <button class="btn-primary">ETC管理</button>
+                        </div>
+                        <div class="card">
+                            <h3>事故報告</h3>
+                            <p>事故報告書の作成と管理を行います</p>
+                            <button class="btn-primary">事故報告</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- アラート -->
+                <div id="alerts" class="page">
+                    <div class="page-header">
+                        <h2>アラート管理</h2>
+                        <button class="btn-secondary">すべて既読</button>
+                    </div>
+                    <div class="card">
+                        <div class="alert-list">
+                            <div class="alert-item urgent">
+                                <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg></span>
+                                <div class="alert-content">
+                                    <p><strong>配車未確定</strong></p>
+                                    <p>受注No. 2024-0012 - 期限: 本日 15:00</p>
+                                    <span class="alert-time">2時間前</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-small">対応</button>
+                                    <button class="btn-small btn-secondary">既読</button>
+                                </div>
+                            </div>
+                            <div class="alert-item warning">
+                                <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></span>
+                                <div class="alert-content">
+                                    <p><strong>受領書未回収</strong></p>
+                                    <p>案件No. 2024-0008 - 期限: 明日</p>
+                                    <span class="alert-time">5時間前</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-small">対応</button>
+                                    <button class="btn-small btn-secondary">既読</button>
+                                </div>
+                            </div>
+                            <div class="alert-item info">
+                                <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></span>
+                                <div class="alert-content">
+                                    <p><strong>点呼簿作成</strong></p>
+                                    <p>明日の点呼簿作成が必要です</p>
+                                    <span class="alert-time">1日前</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-small">対応</button>
+                                    <button class="btn-small btn-secondary">既読</button>
+                                </div>
+                            </div>
+                            <div class="alert-item info">
+                                <span class="alert-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></span>
+                                <div class="alert-content">
+                                    <p><strong>保険期限が近づいています</strong></p>
+                                    <p>車両 90-12 の保険期限: 2025/01/15</p>
+                                    <span class="alert-time">2日前</span>
+                                </div>
+                                <div class="alert-actions">
+                                    <button class="btn-small">対応</button>
+                                    <button class="btn-small btn-secondary">既読</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
